@@ -72,3 +72,26 @@ faiss_results_cifar_clip = pd.DataFrame({"input_idx": input_idx_list, \
 
 faiss_results_cifar_clip['input_coarse_label'] = dataset[input_idx_list]['coarse_label']
 faiss_results_cifar_clip['input_fine_label'] = dataset[input_idx_list]['fine_label']
+
+
+## you can check mean average precision with the following scripts, 
+## mean average precision indicates in a closest K matches, how many on average are correct.
+
+def calc_map(x, i =1):
+    input_c = x['input_coarse_label']
+    input_f = x['input_fine_label']
+
+    c_matches = x['coarse_matches'][:i]
+    f_matches = x['fine_matches'][:1]
+
+    sum_c = sum([1 if x == input_c else 0 for x in c_matches])
+    sum_f = sum([1 if x == input_f else 0 for x in f_matches])
+
+    return (sum_c/i, sum_f/i)
+
+
+hits_at = [1,2,3,5,10,25]
+for i in hits_at:
+    col_name = f"map@{i}"
+    faiss_results_cifar_clip[col_name] = faiss_results_cifar_clip.apply(lambda x: calc_map(x, i = i), axis = 1)
+

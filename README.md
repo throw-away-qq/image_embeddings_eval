@@ -45,7 +45,7 @@ Results are saved to a pandas DataFrame for analysis.
 
 
 ## Next steps
- - [ ] Try other Image embedding models like BLIP 2 etc.
- - [ ] Train a model on ground up with negative samples on CIFAR 10 to compare
-   - [x] ViT backbone vs ResNet
-
+- [ ] Try other Image embedding models like BLIP 2 etc.
+- [ ] Train a model on ground up with negative samples on CIFAR 10 to compare
+  - [x] ViT backbone vs ResNet
+- [ ] Make a image search utility. Multimodal text and gif search with gradio.
